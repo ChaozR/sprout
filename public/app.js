@@ -133,4 +133,37 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // 5. 교통비 모달 팝업 기능
+    const trafficModal = document.getElementById('traffic-modal');
+    const openTrafficModalBtn = document.getElementById('open-traffic-modal');
+    const closeTrafficModalBtn = document.getElementById('close-traffic-modal');
+
+    if (trafficModal && openTrafficModalBtn && closeTrafficModalBtn) {
+        openTrafficModalBtn.addEventListener('click', () => {
+            trafficModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // 배경 스크롤 차단
+        });
+
+        const closeModal = () => {
+            trafficModal.classList.remove('active');
+            document.body.style.overflow = ''; // 스크롤 복구
+        };
+
+        closeTrafficModalBtn.addEventListener('click', closeModal);
+
+        // 바깥 어두운 배경 클릭 시 닫기
+        trafficModal.addEventListener('click', (e) => {
+            if (e.target === trafficModal) {
+                closeModal();
+            }
+        });
+
+        // ESC 키로 닫기
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && trafficModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    }
 });
